@@ -9,16 +9,16 @@ import virusers
 
 def loadgameover(scorenum):  # 绘出GAME OVER
     screen.fill([0, 0, 0])
-    my_font = pygame.font.SysFont(None, 50)
-    levelstr = 'GAME OVER'
+    my_font = pygame.font.SysFont('arial', 50)
+    levelstr = 'GAME OVER'  #游戏结束
     over_screen = my_font.render(levelstr, True, (255, 0, 0))
     screen.blit(over_screen, (200, 240))
-    highscorestr = 'YOUR SCORE IS ' + str(scorenum)
+    highscorestr = 'YOUR SCORE IS ' + str(scorenum)  #显示得分
     over_screen = my_font.render(highscorestr, True, (255, 0, 0))
     screen.blit(over_screen, (200, 290))
-    global count_num
+    global count_num   #分数是一个全局变量，在这里重置为0
     count_num = 0
-    airplane.rect.centerx = 300
+    airplane.rect.centerx = 300  #飞机位置重置
     airplane.rect.top = 800 - 54
     pygame.display.update()  # 刷新
     pygame.time.delay(1000)
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     pygame.mixer.init()
 
     virusers.viruse_new()  # 病毒实例化
-
+    #窗口初始化
     screen = pygame.display.set_mode((600,800))
     pygame.display.set_caption('消灭病毒')
     window_image = pygame.image.load('./airplane.jpg')
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     # 帧率设置
     clock = pygame.time.Clock()
     # 左上角计算分数
-    countObj = pygame.font.Font(None, 50)
+    countObj = pygame.font.SysFont('arial', 50)
     textObj = countObj.render('SCORE:0', True, (255, 0, 0))
     textRectObj = textObj.get_rect()
     screen.blit(textObj, textRectObj)
