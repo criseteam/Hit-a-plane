@@ -25,7 +25,7 @@ def loadgameover(scorenum):  # 绘出GAME OVER
 
 
 if __name__ == '__main__':
-    pygame.init()  #初始化
+    pygame.init()  # 初始化
     pygame.mixer.init()
 
     virusers.viruse_new()  # 病毒实例化
@@ -38,12 +38,10 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
     # 左上角计算分数
     countObj = pygame.font.Font(None, 50)
-    # countObj.set_bold(True)  #加粗
     textObj = countObj.render('SCORE:0', True, (255, 0, 0))
     textRectObj = textObj.get_rect()
     screen.blit(textObj, textRectObj)
     # 这个是计算分数
-    # global count_num
     count_num = 0
     # 创建飞机
     airplane = Airplane(screen)
@@ -58,7 +56,7 @@ if __name__ == '__main__':
         screen.fill((255, 255, 255))  # 背景色
         screen.blit(airplane.image, airplane.rect)
         ''' 添加新病毒 '''
-        if virusers.group.__len__() < 5:
+        if virusers.group.__len__() < 3:
             virusers.viruse_new()  # 病毒实例化
 
         virusers.group.update()  # 病毒
@@ -84,16 +82,19 @@ if __name__ == '__main__':
         # 子弹和病毒组的碰撞
         hit_list = pygame.sprite.groupcollide(bullet_sprites, virusers.group, True, False)
         '''得分'''
-        if hit_list:  # hit_list[obj][0] 返回就是病毒精灵
-            for obj in hit_list:
-                hit_list[obj][0].score -= 10
+        if hit_list.values().__len__():  # hit_list.values() 返回就是病毒精灵
+            for obj in hit_list.values():
+                if obj[0].score > 10:
+                    obj[0].score -= 10
+                else:
+                    obj[0].kill()
                 count_num += 10
         '''结束游戏 '''
         game_over = pygame.sprite.spritecollide(airplane, virusers.group, False)
         if game_over:
             if not game_over[0].Flag:
                 loadgameover(count_num)
-                game_over[0].kill()
+                # game_over[0].kill()
                 game_over[0].Flag = True
 
         # 得分多少

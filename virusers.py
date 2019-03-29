@@ -58,9 +58,9 @@ viruses_images = ['2.png', '3.png']
 def viruse_new():
     position_list = []
     for i in range(10):
-        row = random.randint(0, 9)
+        row = random.randint(0, 8)
         col = random.randint(0, 9)
-        position = [row * 60 + 21, - col * 60 - 30]
+        position = [row * 60 + 33, - col * 60 - 50]
         if position not in position_list:
             position_list.append(position)
             image_name = random.choice(viruses_images)
