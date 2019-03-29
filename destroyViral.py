@@ -41,8 +41,8 @@ if __name__ == '__main__':
 
     screen = pygame.display.set_mode((600,800))
     pygame.display.set_caption('消灭病毒')
-    # window_image = pygame.image.load('')
-    # pygame.display.set_icon(window_image)
+    window_image = pygame.image.load('./airplane.jpg')
+    pygame.display.set_icon(window_image)
     # 帧率设置
     clock = pygame.time.Clock()
     # 左上角计算分数
@@ -61,18 +61,16 @@ if __name__ == '__main__':
     bullet_sprites = pygame.sprite.RenderUpdates()  # 创建sprite容器  树
     AddEnemy = pygame.USEREVENT + 1  # 添加子弹的时间
     pygame.time.set_timer(AddEnemy, 300)
-    #重新加载病毒
-    postion = 0
+
     pygame.display.flip()
     while True:
         clock.tick(60)
         screen.fill((255, 255, 255))  # 背景色
         screen.blit(airplane.image, airplane.rect)
-
-        postion += 3
-        if postion >= 800:
+        #如果病毒死完了
+        if not virusers.group:
             virusers.viruse_new()  # 病毒实例化
-            postion = 0
+
         virusers.group.update()  # 病毒
         virusers.group.draw(screen)
 

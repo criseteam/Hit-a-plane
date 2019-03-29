@@ -9,7 +9,7 @@ class Airplane(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = 300
         self.rect.top = 800 - 54
-        self.speed = 2
+        self.speed = 4
 
         # 根据按键事件来移动
     def update(self, pressed_keys):
