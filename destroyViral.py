@@ -24,15 +24,6 @@ def loadgameover(scorenum):  # 绘出GAME OVER
     pygame.time.delay(1000)
 
 
-  # if scorenum>int(highscore):#写入最高分
-  #   highscorestr='YOUR HAVE GOT THE HIGHEST SCORE!'
-  #   text_screen=my_font.render(highscorestr, True, (255, 0, 0))
-  #   screen.blit(text_screen, (100,340))
-  #   highfile=open('highscore','w')
-  #   highfile.writelines(str(scorenum))
-  #   highfile.close()
-
-
 if __name__ == '__main__':
     pygame.init()  #初始化
     pygame.mixer.init()
@@ -46,14 +37,13 @@ if __name__ == '__main__':
     # 帧率设置
     clock = pygame.time.Clock()
     # 左上角计算分数
-    # countObj = pygame.font.SysFont('方正兰亭超细黑简体',30)
     countObj = pygame.font.Font(None, 50)
     # countObj.set_bold(True)  #加粗
     textObj = countObj.render('SCORE:0', True, (255, 0, 0))
     textRectObj = textObj.get_rect()
-    screen.blit(textObj,textRectObj)
+    screen.blit(textObj, textRectObj)
     # 这个是计算分数
-    global count_num
+    # global count_num
     count_num = 0
     # 创建飞机
     airplane = Airplane(screen)
@@ -67,8 +57,8 @@ if __name__ == '__main__':
         clock.tick(60)
         screen.fill((255, 255, 255))  # 背景色
         screen.blit(airplane.image, airplane.rect)
-        #如果病毒死完了
-        if not virusers.group:
+        ''' 添加新病毒 '''
+        if virusers.group.__len__() < 5:
             virusers.viruse_new()  # 病毒实例化
 
         virusers.group.update()  # 病毒
@@ -103,6 +93,7 @@ if __name__ == '__main__':
         if game_over:
             if not game_over[0].Flag:
                 loadgameover(count_num)
+                game_over[0].kill()
                 game_over[0].Flag = True
 
         # 得分多少

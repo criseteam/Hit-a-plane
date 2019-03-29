@@ -36,12 +36,11 @@ class Viruses(pygame.sprite.Sprite):
             self.X_speed = -self.X_speed
         if self.rect.bottom > 800 + self.rect.height:
             self.rect.top = -self.rect.height
-        if self.score == 0:
+
+        if not self.score:
             self.kill()
         elif self.score == 10:
             self.trun(1)
-
-
 
     ''' 换图 '''
     def trun(self, value):
@@ -65,7 +64,7 @@ def viruse_new():
         if position not in position_list:
             position_list.append(position)
             image_name = random.choice(viruses_images)
-            obj = Viruses(image_name, position, random.randint(1, 3), random.randint(1, 3))
+            obj = Viruses(image_name, position, random.randint(0, 3), random.randint(1, 3))
             group.add(obj)
 
 
