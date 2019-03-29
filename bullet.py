@@ -15,7 +15,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
-        self.speed = 1
+        self.speed = 5
 
     def update(self):
         """Move the bullet up the screen."""

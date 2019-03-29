@@ -16,6 +16,10 @@ def loadgameover(scorenum):  # 绘出GAME OVER
     highscorestr = 'YOUR SCORE IS ' + str(scorenum)
     over_screen = my_font.render(highscorestr, True, (255, 0, 0))
     screen.blit(over_screen, (200, 290))
+    global count_num
+    count_num = 0
+    airplane.rect.centerx = 300
+    airplane.rect.top = 800 - 54
     pygame.display.update()  # 刷新
     pygame.time.delay(1000)
 
@@ -49,19 +53,26 @@ if __name__ == '__main__':
     textRectObj = textObj.get_rect()
     screen.blit(textObj,textRectObj)
     # 这个是计算分数
+    global count_num
     count_num = 0
     # 创建飞机
     airplane = Airplane(screen)
     # 子弹容器
     bullet_sprites = pygame.sprite.RenderUpdates()  # 创建sprite容器  树
     AddEnemy = pygame.USEREVENT + 1  # 添加子弹的时间
-    pygame.time.set_timer(AddEnemy, 1000)
+    pygame.time.set_timer(AddEnemy, 300)
+    #重新加载病毒
+    postion = 0
     pygame.display.flip()
     while True:
         clock.tick(60)
         screen.fill((255, 255, 255))  # 背景色
         screen.blit(airplane.image, airplane.rect)
 
+        postion += 3
+        if postion >= 800:
+            virusers.viruse_new()  # 病毒实例化
+            postion = 0
         virusers.group.update()  # 病毒
         virusers.group.draw(screen)
 
